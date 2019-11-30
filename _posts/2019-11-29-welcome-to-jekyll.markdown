@@ -14,7 +14,7 @@ author:  Amit Tallapragada
 #   image: /assets/amit_prof.jpg
 #   og_image: /assets/amit_prof.jpg
 ---
-Hey everyone! Welcome to my first blog tutorial. In this post, I will walkthrough building a simple dockerized flask application. This is the first part in a series of blog posts in which we will be building a chat bot that can answer simple questions about nba players. All the code in this project will be written in python.
+In this post, I will walkthrough building a simple dockerized flask application. This is the first part in a series of blog posts in which we will be building a chat bot that can answer simple questions about nba players. All the code in this project will be written in python.
 
 # Brief Overview
 ## What is Flask
