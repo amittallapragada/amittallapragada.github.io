@@ -173,7 +173,8 @@ Our Client application is very simple in comparision to the server. It is one ht
 </html>
 {% endhighlight %}
 
-The only part worth discussing in this file is the script section. Here we create a new EventSource variable called source. our source var denotes that our client has subscribed to our server's stream-logs endpoint. The onmessage function of our EventSource object lets us program a custom action anytime we receive a new message from the stream. In our case we will be modifying a div and appending our log data there. (I styled this element to kind of look like a console :P)
+The only part worth discussing in this file is the script section. Here we create a new EventSource variable called source. our source var denotes that our client has subscribed to our server's stream-logs endpoint. The onmessage function of our EventSource object lets us program a custom action anytime we receive a new message from the stream. In our case we will be modifying a div and appending our log data there. (I attempted to style this element to look like a console)
+
 
 # Lets Run It!
 Awesome! We have our server and client code written up. To make this work we first need to run our server and logger files. Once both are running, we can open the client html in any web browser. I go into detail on how to run these scripts on the project [github](https://github.com/amittallapragada/SSELoggerDemo) page as well! Thanks for following along!
