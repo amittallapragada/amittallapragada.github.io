@@ -1,19 +1,14 @@
 ---
-layout: single
-author_profile: true
-read_time: true
-comments: true
-share: true
-related: true
-layout: single
-title:  "Building a Dockerized NBA Stats API"
-date:   2019-11-29 16:32:17 -0800
+layout: post
+title:  "Building a Simple Chatbot with Rasa"
+date:   2020-12-22 20:37:09 -0800
 categories: docker flask api
 author:  Amit Tallapragada
-# header:
-#   image: /assets/amit_prof.jpg
-#   og_image: /assets/amit_prof.jpg
+thumbnail: /assets/texting.jpg
+header:
+  teaser: "/assets/texting.jpg"
 ---
+
 In this post, I will walkthrough building a simple dockerized flask application. This is the first part in a series of blog posts in which we will be building a chat bot that can answer simple questions about nba players. All the code in this project will be written in python.
 
 # Brief Overview

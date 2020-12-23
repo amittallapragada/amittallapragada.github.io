@@ -1,8 +1,0 @@
-Amit Tallapragada:
-  name        : "Amit Tallapragada"
-  bio         : "This is my blog about tech I like."
-  avatar      : "/assets/amit_prof.jpg"
-  links:
-    - label: "Email"
-      icon: "fas fa-fw fa-envelope-square"
-      url: "mailto:amittallapragada@gmail.com"
