@@ -1,0 +1,12 @@
+longest repeating sub-string (have brute force need to study binary search)
+lru cache
+Container Most Water (review pointer approach and brute force)
+Trap Rain Water
+Valid Parentheses (X)
+Text Justification (?) try and recode (X)
+Word Search (X)
+My Calendar (X) not(e2 <= s1 or e1 <= s2) =>  s1 < e2 and s2 < e1 
+Two Sum (X)
+Two Sum array is sorted (X)
+Given a tree find the lists of parents who has exactly 1 parent and zero parents
+LCA question (mid = p ==rot, q==rot solution) LCA of BST?

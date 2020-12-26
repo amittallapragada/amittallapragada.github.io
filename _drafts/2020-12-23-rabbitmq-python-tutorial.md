@@ -11,7 +11,7 @@ header:
 
 In this post, I will walkthrough building a simple dockerized flask application. This is the first part in a series of blog posts in which we will be building a chat bot that can answer simple questions about nba players. All the code in this project will be written in python.
 
-# Brief Overvie
+# Brief Overview
 ## What is Flask
 Flask is a python library..
 
@@ -37,13 +37,3 @@ BLAH
 
 
 
-Blog post idea
-- nba rasa chat bot
-- k-means and elbow method
-- what is docker
-- docker/flask/angular tutorial
-- what is oauth 
--build your own oauth api
-- building secure apis with flask and docker
-- anomaly detection algorithm overviews
-- sorting algos

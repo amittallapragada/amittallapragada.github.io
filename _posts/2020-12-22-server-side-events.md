@@ -8,32 +8,33 @@ thumbnail: /assets/2020-12-22-server-side-events/terminal.png
 ---
 ![Banner](/assets/2020-12-22-server-side-events/terminal.png)
 
-Server-Sent Events (SSE) are often overshadowed by its two big brothers - Web Sockets and Long-Polling. However, there are many practical use cases for using SSE. This post will explain SSE, when to use it, and implement a simple SSE application with FastAPI.
+Server-Sent Events (SSE) are often overshadowed by its two big brothers - Web Sockets and Long-Polling. However, there are many practical use cases for using SSE. Updating dynamic content, sending push notifications, and streaming data in Realtime are just a few of the applications that SSE can be utilized for. This post will explain SSE, when to use it, and implement a simple SSE application with FastAPI.
 
 ## What is SSE
 
 > Traditionally, a web page has to send a request to the server to receive new data; that is, the page requests data from the server. With server-sent events, it's possible for a server to send new data to a web page at any time, by pushing messages to the web page. [MDN](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events)
 
 What does this mean? 
-Essentially, SSE enable users to subscribe to a stream of real-time data. Anytime this data stream updates, users can see new events in real-time. If you have worked with Long-Polling or Web Socket applications in the past, you may be wondering what's the big deal about SSE?
+Essentially, Server-Sent Events (SSE) enable users to subscribe to a stream of real-time data. Anytime this data stream updates, users can see new events in real-time. If you have worked with Long-Polling or Web Socket applications in the past, you may be wondering what's the big deal about SSE?
 
 ### SSE vs Web Sockets
 <p align="center">
 <img src="/assets/2020-12-22-server-side-events/price-change.gif" width="200"/>
 </p>
-In short, you can think of SSE as a unidirectional web socket. Only the server can send messages to subscribed clients. There are many web applications where web sockets maybe overkill. For example, updating the price of an item on a product page does not need bidirectional communication. The server simply needs one-way commnication to update prices for all of it's clients. This is a perfect use case for SSE. 
+Websockets are a bidirectional form of communication between servers. They are typically used to build chatrooms or multiplayer video games as these applications require constant communication between servers and clients. You can think of SSE as a unidirectional websocket. Only the server can send messages to subscribed clients. There are many web applications where web sockets maybe overkill. For example, updating the price of an item on a product page does not need bidirectional communication. The server simply needs one-way communication to update prices for all of its clients. This is a perfect use case for SSE. 
 
 ### SSE vs Long Polling
-SSE is usually used in applications where events are generated quickly. For example, updating the description of a video, displaying server log files on a UI, or pushing a notification to a user's phone. All of these events are near instant updates. SSE starts to become less efficient when we have tasks that take a long time to complete. Think, your doordash delivery status or getting status updates on a loan approval. These events take a long time to complete so constantly checking for the completion of these tasks may be unnecessary. These are cases where long-polling might be better.
+
+Long Polling is a method of communication where the client periodically hits the server for new data. This form of communication is often used when the application being built involves human intervention or executing computationally expensive tasks.  Think, your DoorDash delivery status or triggering the training of a heavy machine learning model. These events take a long time to complete as they may require an update from a person or are simply just computationally heavy. In situations like these, constantly checking for the completion of these tasks may be unnecessary. SSE is usually used in applications where events are generated quickly. For example, hosting a live count of likes on a YouTube video, displaying server log files on a UI, or pushing a notification to a user's phone. All of these events are near instant updates.
 
 ### Quick Review
-In short, SSE is a great tool for streaming quick real-time data. They offer unidirectional communication from a server to it's clients and are typically used for updating dynamic content on webpages.
+In short, SSE is a great tool for streaming quick real-time data. They offer unidirectional communication from a server to its clients and are typically used for updating dynamic content on web pages.
 
 ## Lets display log files on a web page using SSE!
 
 ![Demo](/assets/2020-12-22-server-side-events/app_demo.gif)
 
-Now that we know the advantages and drawbacks of SSE, lets use it. We will be building a web page that displays logfiles from a server in real-time! This is a great example use case for SSE as logs are events that generally update quickly. We also have no need for bi-directional communication. For this tutorial we will be using python and FastAPI. FastAPI is a great tool for SSE applications as it is really easy to use and is built upon starlette which has SSE capabilities built in. All the code shown below will be available on [Github](https://github.com/amittallapragada/SSELoggerDemo). 
+Now that we know the advantages and drawbacks of SSE, let's use it. We will be building a web page that displays logfiles from a server in real-time! This is a great example use case for SSE as logs are events that generally update quickly. We also have no need for bi-directional communication. For this tutorial we will be using python and FastAPI. FastAPI is a great tool for SSE applications as it is really easy to use and is built upon starlette which has SSE capabilities built in. All the code shown below will be available on [Github](https://github.com/amittallapragada/SSELoggerDemo). 
 
 The code will be broken up into 2 parts: the server and the client
 
@@ -42,8 +43,8 @@ The code will be broken up into 2 parts: the server and the client
 
 The server application will have to parts - a program that simulates our logs being generated, and a program that streams these logs. 
 
-Our log generator is a pretty straightforward. We will create a file called program.py. In it,we first create a logger object that points to our logfile. Then we will write an infinite while loop that prints some random message into our log file. 
-
+Our log generator is a pretty straightforward. We will create a file called program.py. In it, we first create a logger object that points to our logfile. Then we will write an infinite while loop that prints some random message into our log file. We will put a small time.sleep() just to slow down the amount of logs we make.
+#### **`program.py`**
 {% highlight python %}
 import logging 
 import time 
@@ -64,17 +65,17 @@ i = 0
 while True:
     logger.info(f"log message num: {i}")
     i += 1
-    time.sleep(0.3)
+    time.sleep(0.5)
 {% endhighlight %}
 
 
-Ok now we have a program that generates our logs. Now lets stream these logs with SSE. To do this we will be building a quick web-server using FastAPI. There are some python libraries you need installed for this code snippet to work so I highly recommend you follow my setup instructions on the [github](https://github.com/amittallapragada/SSELoggerDemo) readme before you proceed. We will write all our server logic in a file called server.py.
+Ok now we have a program that generates our logs. Now let's stream these logs with SSE. To do this we will be building a quick webserver using FastAPI. There are some python libraries you need installed for this code snippet to work so I highly recommend you follow my setup instructions on the [Github](https://github.com/amittallapragada/SSELoggerDemo) readme before you proceed. We will write all our server logic in a file called server.py.
 
 
-The web server code can be broken up into three parts: imports and server setup, our SSE generator, and our server endpoint. Lets go through each part
+The webserver code can be broken up into three parts: imports and server setup, our SSE generator, and our server endpoint. Let's go through each part:
 
 #### Imports and Server Setup
-
+#### **`server.py`**
 {% highlight python %}
 from fastapi import FastAPI, Request
 from sse_starlette.sse import EventSourceResponse
@@ -99,10 +100,10 @@ dir_path = os.path.dirname(real_path)
 LOGFILE = f"{dir_path}/test.log"
 {% endhighlight %}
 
-The main imports you need to know about here are FastAPI, EventSourceResponse, and tail. FastAPI will enable us to quickly build a web server. EventSourceResponse is a function from the sse_starlette library that converts  python generator objects into SSE signals. the tail function from the sh library lets us infinitely tail a file and prints only unread lines. This will be crucial in us developing a logger as we only want to display lines that users have not yet seen. After we complete our imports, we create an instance of FastAPI. We also add some cors middleware to allow our server-sent events to be accepted by our clients.
+The main imports you need to know about here are FastAPI, EventSourceResponse, and tail. FastAPI will enable us to quickly build a webserver. EventSourceResponse is a function from the sse_starlette library that converts  python [generator](https://wiki.python.org/moin/Generators) objects into SSE signals. the tail function from the sh library lets us infinitely tail a file and prints only unread lines. This will be crucial in us developing a logger as we only want to display lines that users have not yet seen. After we complete our imports, we create an instance of FastAPI. We also add some CORS middleware to allow our server-sent events to be accepted by our clients.
 
 #### SSE Generator
-
+#### **`server.py`**
 {% highlight python %}
 #This async generator will listen to our log file in an infinite while loop (happens in the tail command)
 #Anytime the generator detects a new line in the log file, it will yield it.
@@ -115,12 +116,12 @@ async def logGenerator(request):
         time.sleep(0.5)
 {% endhighlight %}
 
-Thanks to the EventSourceResponse function, we can send python generators as server-sent events. Our generator is defined in the logGenerator functoin. It uses the tail import to indefinitely follow our log file and yield new lines anytime the file is updated. You may be wondering why the function is asynchronous and what the request.is_disconnected is doing. I'll explain that later on.
+Thanks to the EventSourceResponse function, we can send python [generators](https://wiki.python.org/moin/Generators) as server-sent events. Our generator is defined in the logGenerator function. It uses the tail import to indefinitely follow our log file and yield new lines anytime the file is updated. We will also add a sleep function to slow down the speed of the generator. This will make it easier for us to follow the logs as they print on the web page. You may be wondering why the function is asynchronous and what the request.is_disconnected is doing. I'll explain that later on.
 
 #### Server Endpoint
-
+#### **`server.py`**
 {% highlight python %}
-#This is our api endpoint. When a client subscribes to this endpoint, they will recieve SSE from our log file
+#This is our api endpoint. When a client subscribes to this endpoint, they will receive SSE from our log file
 @app.get('/stream-logs')
 async def run(request: Request):
     event_generator = logGenerator(request)
@@ -131,14 +132,16 @@ uvicorn.run(app, host="0.0.0.0", port=8000, debug=True)
 {% endhighlight %}
 
 
-Last but not least, we have our server endpoint. We create a route "/stream-logs" which will create an instance of the logGenerator and return is as an EventSourceResponse. An EventSourceResponse is starlette's representation of a server-sent event. You may notice that our run method takes in a request object and passes it on to the logGenerator. One cool advantage of starlette requests are that we can monitor whether a client is subscribed to an endpoint. This enable us to break a specific client's connection to our endpoint when they disconnect. This is what the "request.is_disconnected" logic does in the logGenerator.
+Last but not least, we have our server endpoint. We create a route "/stream-logs" which will create an instance of the logGenerator and return is as an EventSourceResponse. An EventSourceResponse is starlette's representation of a server-sent event. You may notice that our run method takes in a request object and passes it on to the logGenerator. One cool advantage of starlette requests is that we can monitor the entire lifecycle of a client's request. This lets us to break our generator and save resources whenever we detect that a particular client has disconnected. This is what the "request.is_disconnected" logic does in the logGenerator. The final line in this snippet runs our web server on your localhost on port 8080 and can be accessed like this:
+http://0.0.0.0:8000/
+
 
 
 
 # The Client Application 
 
-Our Client application is very simple in comparision to the server. It is one html page that subscribes to our server. It will be named client.html
-
+Our Client application is very simple in comparison to the server. It is one html page that subscribes to our server. It will be named client.html
+#### **`client.html`**
 {% highlight html %}
 <!DOCTYPE html>
 <html>
@@ -177,7 +180,7 @@ The only part worth discussing in this file is the script section. Here we creat
 
 
 # Lets Run It!
-Awesome! We have our server and client code written up. To make this work we first need to run our server and logger files. Once both are running, we can open the client html in any web browser. I go into detail on how to run these scripts on the project [github](https://github.com/amittallapragada/SSELoggerDemo) page as well! Thanks for following along!
+Awesome! We have our server and client code written up. To make this work we first need to run our server and logger files. Once both are running, we can open the client html in any web browser. I go into detail on how to run these scripts on the project [Github](https://github.com/amittallapragada/SSELoggerDemo) page as well! Thanks for following along!
 
 
 
