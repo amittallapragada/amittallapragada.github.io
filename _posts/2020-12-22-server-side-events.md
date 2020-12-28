@@ -5,6 +5,7 @@ date:   2020-12-22 20:37:09 -0800
 categories: docker fastapi python
 author:  Amit Tallapragada
 thumbnail: /assets/2020-12-22-server-side-events/terminal.png
+quicklook: "Sending SSE with Python FastAPI"
 ---
 ![Banner](/assets/2020-12-22-server-side-events/terminal.png)
 

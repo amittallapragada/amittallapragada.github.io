@@ -87,31 +87,39 @@ layout: default
         </h1>
       </div>
     </div>
-
-
+  <br>
+  <h2>Recent Blog Posts</h2> 
   {% if site.paginate %}
     {% assign posts = paginator.posts %}
   {% else %}
     {% assign posts = site.posts %}
   {% endif %}
 
+  {% if posts.size >= 3 %}
+    {% assign size = 3 %}
+  {% else %}
+    {% assign size=posts.size %}
+  {% endif %}
   {%- if posts.size > 0 -%}
     {%- if page.list_title -%}
       <h2 class="post-list-heading">{{ page.list_title }}</h2>
     {%- endif -%}
     <ul class="post-list">
       {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
-      {%- for post in posts -%}
+      <h2>{{i}}</h2>
+      {%- for i in (0..size-1) -%}
+      <h2>{{i}}</h2>
+      {% assign post = posts[i] %}
       <li>
         <span class="post-meta">{{ post.date | date: date_format }}</span>
+        <a class="post-link" href="{{ post.url | relative_url }}">
+          <img src={{ post.thumbnail | default: "/assets/texting.jpg"}} width="1200" height="200" onMouseOver="this.style.opacity='0.5'" onMouseOut="this.style.opacity='1.0'">
+        </a>
         <h3>
           <a class="post-link" href="{{ post.url | relative_url }}">
             {{ post.title | escape }}
           </a>
         </h3>
-        <a class="post-link" href="{{ post.url | relative_url }}">
-          <img src={{ post.thumbnail | default: "/assets/texting.jpg"}} width="1200" height="200" onMouseOver="this.style.opacity='0.5'" onMouseOut="this.style.opacity='1.0'">
-        </a>
         {%- if site.show_excerpts -%}
           {{ post.excerpt }}
         {%- endif -%}

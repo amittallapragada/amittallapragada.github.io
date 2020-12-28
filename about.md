@@ -4,7 +4,7 @@ title: About
 permalink: /about/
 ---
 # Overview
-I am currently a software engineer at Cisco Systems in San Jose, CA. I graduated from Arizona State University with a B.S in Computer Science in 2019. My primary fields of work are natural language processing and backend web application infrastructure. Outside of my career, I enjoy stand up comedy, traveling, and making new friends!
+I am currently a software engineer at Cisco Systems in San Jose, CA. I graduated from Arizona State University with a B.S in Computer Science in 2019. I primarily work on backend web development but also have experience in machine learning. Outside of my career, I enjoy stand up comedy, traveling, and making new friends!
 
 # Current Job
 <p align="left">
