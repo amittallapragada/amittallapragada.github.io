@@ -2,7 +2,7 @@
 layout: post
 title:  "Realtime Log Streaming with FastAPI and Server-Sent Events"
 date:   2020-12-22 20:37:09 -0800
-categories: docker flask api
+categories: docker fastapi python
 author:  Amit Tallapragada
 thumbnail: /assets/2020-12-22-server-side-events/terminal.png
 ---
