@@ -106,9 +106,7 @@ layout: default
     {%- endif -%}
     <ul class="post-list">
       {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
-      <h2>{{i}}</h2>
       {%- for i in (0..size-1) -%}
-      <h2>{{i}}</h2>
       {% assign post = posts[i] %}
       <li>
         <span class="post-meta">{{ post.date | date: date_format }}</span>
