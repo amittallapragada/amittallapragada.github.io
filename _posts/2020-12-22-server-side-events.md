@@ -21,11 +21,11 @@ Essentially, Server-Sent Events (SSE) enable users to subscribe to a stream of r
 <p align="center">
 <img src="/assets/2020-12-22-server-side-events/price-change.gif" width="200"/>
 </p>
-Websockets are a bidirectional form of communication between servers. They are typically used to build chatrooms or multiplayer video games as these applications require constant communication between servers and clients. You can think of SSE as a unidirectional websocket. Only the server can send messages to subscribed clients. There are many web applications where web sockets maybe overkill. For example, updating the price of an item on a product page does not need bidirectional communication. The server simply needs one-way communication to update prices for all of its clients. This is a perfect use case for SSE. 
+[Websockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) are a bidirectional form of communication between servers. They are typically used to build chatrooms or multiplayer video games as these applications require constant communication between servers and clients. You can think of SSE as a unidirectional websocket. Only the server can send messages to subscribed clients. There are many web applications where web sockets maybe overkill. For example, updating the price of an item on a product page does not need bidirectional communication. The server simply needs one-way communication to update prices for all of its clients. This is a perfect use case for SSE. 
 
 ### SSE vs Long Polling
 
-Long Polling is a method of communication where the client periodically hits the server for new data. This form of communication is often used when the application being built involves human intervention or executing computationally expensive tasks.  Think, your DoorDash delivery status or triggering the training of a heavy machine learning model. These events take a long time to complete as they may require an update from a person or are simply just computationally heavy. In situations like these, constantly checking for the completion of these tasks may be unnecessary. SSE is usually used in applications where events are generated quickly. For example, hosting a live count of likes on a YouTube video, displaying server log files on a UI, or pushing a notification to a user's phone. All of these events are near instant updates.
+[Long Polling](https://www.ably.io/topic/long-polling#:~:text=Rather%20than%20having%20to%20repeat,available%20or%20a%20timeout%20threshold) is a method of communication where the client periodically hits the server for new data. This form of communication is often used when the application being built involves human intervention or executing computationally expensive tasks.  Think, your DoorDash delivery status or triggering the training of a heavy machine learning model. These events take a long time to complete as they may require an update from a person or are simply just computationally heavy. In situations like these, constantly checking for the completion of these tasks may be unnecessary. SSE is usually used in applications where events are generated quickly. For example, hosting a live count of likes on a YouTube video, displaying server log files on a UI, or pushing a notification to a user's phone. All of these events are near instant updates.
 
 ### Quick Review
 In short, SSE is a great tool for streaming quick real-time data. They offer unidirectional communication from a server to its clients and are typically used for updating dynamic content on web pages.
@@ -181,6 +181,8 @@ The only part worth discussing in this file is the script section. Here we creat
 
 # Lets Run It!
 Awesome! We have our server and client code written up. To make this work we first need to run our server and logger files. Once both are running, we can open the client html in any web browser. I go into detail on how to run these scripts on the project [Github](https://github.com/amittallapragada/SSELoggerDemo) page as well! Thanks for following along!
+
+![Demo](/assets/2020-12-22-server-side-events/app_demo.gif)
 
 
 
