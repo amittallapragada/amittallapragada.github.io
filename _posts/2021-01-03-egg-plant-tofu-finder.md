@@ -18,6 +18,30 @@ TLDR: I made a map with every Panda Express location in the USA that serves Eggp
 
 If you are vegetarian you already know that, Panda Express is a magical place. My go to meal - a Panda Bowl with Eggplant Tofu has been my STAPLE item for the past 10 years. However, after going to college at Arizona, I learned that not all Pandas are created equally. Some locations DONT HAVE EGGPLANT TOFU. Although this travesty may never be solved in our lifetimes, if you are curious and want to know which ones do serve them- follow along.
 
+### Things I learned about Eggplant Tofu's Distribution
+
+1.  Of the 1,984 Pandas Express Locations I scraped, only 157 of them had Eggplant Tofu. Only ~8% of Pandas have Eggplant Tofu 💀
+
+2. Northern California is the city of gold for Eggplant Tofu lovers
+<p align="left">
+<img src="/assets/2021-01-03-egg-plant-tofu-finder/norCal.png" width="400"/>
+</p>
+
+3. The Midwest is not kind to Eggplant Tofu
+<p align="left">
+<img src="/assets/2021-01-03-egg-plant-tofu-finder/kansas_1.png" width="400"/>
+</p>
+
+4. Except this one dude in Grandview? 
+<p align="left">
+<img src="/assets/2021-01-03-egg-plant-tofu-finder/kansas_2.png" width="400"/>
+</p>
+
+5. Hawaii is my safe space
+<p align="left">
+<img src="/assets/2021-01-03-egg-plant-tofu-finder/hawaii.png" width="400"/>
+</p>
+
 ### General Idea
 In order to do this, we will be "ordering" food from every single panda express in the United States. When you order food from the panda express website, their backend servers return every single menu item that the particular store you are ordering from offers. We will simply check for eggplant tofu in this list. However, in order to do this, we are gonna need a list of every Panda Express in the USA.
 
