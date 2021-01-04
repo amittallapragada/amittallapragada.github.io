@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "I reverse engineered Panda Express's Internal API to map out every store that has Eggplant Tofu"
+title:  "I reverse engineered Panda Express's Internal API to map every store that has Eggplant Tofu"
 date:   2021-01-03 20:37:09 -0800
-categories: docker jupyter notebook python apis
+categories: eggplant tofu jupyter notebook python apis panda express
 author:  Amit Tallapragada
 thumbnail: /assets/2021-01-03-egg-plant-tofu-finder/banner.png
 quicklook: "Sending SSE with Python FastAPI"
@@ -151,7 +151,7 @@ with open("eggPlantFinder.json",'w') as f:
 
 Let me explain this snippet. We are looping through our eggPlantData dictionary and calling the store api for each store in the dict. We then check if that particular store has eggplant tofu or not. We store this in our eggPlantData dictionary as another key called "has_eggplant". This code takes a long time to run so I saved it to a file. I'll make it available on my github as well. 
 
-Perfect! We could just stop here. We have a list of every panda express along with its coordinates that have eggplant tofu. But it wouldn't be a complete project until we map it...
+Perfect! We could just stop here. We have a list of every panda express along with its coordinates that have eggplant tofu. But it wouldn't be a complete project unless we mapped it...
 
 ### Step 4: Lets Map It
 
