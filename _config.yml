@@ -27,11 +27,12 @@ email: amittallapragada@gmail.com
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  amittallapragada
-
 # Build settings
 theme: minima
 plugins:
   - jekyll-feed
+# Google Analytics
+google_analytics: G-Y3QD5HET8J
 
 # Exclude from processing.
 # The following items will not be processed, by default.
